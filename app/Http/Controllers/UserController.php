@@ -6,17 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
     public static function index(): View
     {
-        $users = User::where('role', '<>', 'admin')->paginate(20); //User::all();
+        $users = User::where('email', '<>', 'admin')->paginate(20); //User::all();
 
         return view("admin.users.index", compact("users"));
     }
@@ -40,18 +40,14 @@ class UserController extends Controller
         //$user = User::where('id', '=', $id)->first();
         //$user = User::where('id', $id)->first(); // to API firstOrFail();
 
-        if (!$user = User::find($id)) {
-            return redirect()->route('users.index')->with('message', "Usuário não encontrado");
-        }
+        $user = User::userExists($id);
 
         return view('admin.users.edit', compact('user'));
     }
 
     public function update(string $id, UpdateUserRequest $request): RedirectResponse
     {
-        if (!$user = User::find($id)) {
-            return back()->with('message', "Usuário não encontrado");
-        }
+        $user = User::userExists($id);
 
         $data = $request->only('name', 'email');
 
@@ -76,6 +72,14 @@ class UserController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $user = User::userExists($id);
+
+        /* 
+        * Verifica se o usuário da sessão, possui a permissão de is-admin
+        if(Gate::allows('is-admin'))
+        {
+            return back()->with('warning', "Está funcionando");
+        }
+        */
 
         if (Auth::user()->id === $user->id) {
             return back()->with('warning', "Não é possível deletar o próprio perfil");

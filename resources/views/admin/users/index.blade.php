@@ -2,7 +2,10 @@
 
     <div class="flex flex-col m-8 justify-center">
         
-        <a class="text-5xl font-bold text-green-300 hover:text-green-700 w-32" href="{{ route('users.create')}}">Novo</a>
+        <a class="text-5xl font-bold text-green-300 hover:text-green-700 w-32" 
+            href="{{ route('users.create')}}">
+            Novo
+        </a>
         
         <x-alert></x-alert>
         
@@ -23,6 +26,7 @@
                     <td class="border border-slate-700 text-center">{{ $user->name }}</td>
                     <td class="border border-slate-700 text-center">{{ $user->email }}</td>
                     <td class="border border-slate-700 hover:cursor-pointer">
+                        @can('is-admin')
                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                             @csrf
                             @method('delete')
@@ -31,6 +35,7 @@
                             </button>
                         </form>
                         <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                        @endcan
                         <a href="{{ route('users.show', $user->id) }}">Detalhes</a>
                     </td>
                 </tr>
