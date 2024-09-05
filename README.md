@@ -3,7 +3,7 @@
 This web application is make with Laravel v11, using Authorizations and Blade Template.
 
 # To run this application:
-You need to install <i>Composer</i>, <i>php</i> and <i>node</i>
+You need to install <i>Composer</i>, <i>php</i> and <i>node</i><br>
 
 ## Download
 #### <i>Windows</i>
@@ -15,6 +15,11 @@ You need to install <i>Composer</i>, <i>php</i> and <i>node</i>
 - #### Php -> Read this link and see what version is compatible with your system [https://windows.php.net/download/](https://www.php.net/manual/en/install.unix.debian.php)
 - #### Node -> https://nodejs.org/en/download/package-manager
 #
+## Repository
+```bash
+    git clone https://github.com/teteu-hue/ganjablog.git
+```
+
 ### 1° - Install composer dependencies
 ```bash
     composer install
