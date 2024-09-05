@@ -13,7 +13,7 @@ You need to install <i>Composer</i>, <i>php</i> and <i>node</i>
 #### <i>Linux</i>
 - #### Composer -> Read this link and see what version is compatible with your system [https://getcomposer.org/download/](https://getcomposer.org/download/)
 - #### Php -> Read this link and see what version is compatible with your system [https://windows.php.net/download/](https://www.php.net/manual/en/install.unix.debian.php)
-- #### Nhp -> https://nodejs.org/en/download/package-manager
+- #### Node -> https://nodejs.org/en/download/package-manager
 #
 ### 1° - Install composer dependencies
 ```bash
